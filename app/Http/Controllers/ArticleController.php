@@ -14,7 +14,16 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        //$articles = Article::all();
+        $articles = Article::where('user_id', '1')
+            ->where(function($query){
+                return $query->whereYear('created_at', 2018)
+                ->orWhereYear('updated_at', 2020);
+            })
+            ->get();
+            //->toSql();
+            //dd($articles);
+        return view('articles.index', compact('articles'));
     }
 
     /**

@@ -19,3 +19,8 @@ Route::get('/', function () {
 Route::get('/users', 'UserController@index')->name('users');
 Route::get('/users/create', 'UserController@create')->name('users.create');
 Route::post('/users/create', 'UserController@store')->name('users.store');
+
+//article
+Route::get('/articles', 'ArticleController@index')->name('articles');
+Route::get('/articles/create', 'ArticleController@create')->name('articles.create');
+Route::post('/articles/create', 'ArticleController@store')->name('articles.store');
