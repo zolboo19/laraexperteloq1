@@ -27,15 +27,14 @@ class ArticleController extends Controller
         //$dateNow = now()->subDays(30);
         //dd($dateNow);
 
-        $articles = Article::newest()->get();
+        $articles = Article::all();
         //dd($articles);
         return view('articles.index', compact('articles'));
     }
 
     public function search(Request $request){
         //dd($request->user_id);
-        $articles = Article::newest()
-            ->where('user_id', $request->user_id)
+        $articles = Article::where('created_at', '>', now()->subDays(1))         
             ->get();
         //->toSql();
         //$articles = Article::all();

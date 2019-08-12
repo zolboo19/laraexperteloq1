@@ -25,6 +25,6 @@ Route::post('/users/create', 'UserController@store')->name('users.store');
 Route::get('/articles', 'ArticleController@index')->name('articles');
 Route::get('/articles/create', 'ArticleController@create')->name('articles.create');
 Route::post('/articles/create', 'ArticleController@store')->name('articles.store');
-Route::get('/articles/search/{user_id}', 'ArticleController@search')->name('articles.search');
+Route::get('/articles/search', 'ArticleController@search')->name('articles.search');
 
 Route::get('/home', 'HomeController@index')->name('home');
