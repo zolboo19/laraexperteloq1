@@ -14,7 +14,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //$articles = Article::all();
+        /* $articles = Article::all();
         $articles = Article::where('user_id', '1')
             ->where(function($query){
                 return $query->whereYear('created_at', 2018)
@@ -23,6 +23,23 @@ class ArticleController extends Controller
             ->get();
             //->toSql();
             //dd($articles);
+        return view('articles.index', compact('articles')); */
+        //$dateNow = now()->subDays(30);
+        //dd($dateNow);
+
+        $articles = Article::newest()->get();
+        //dd($articles);
+        return view('articles.index', compact('articles'));
+    }
+
+    public function search(Request $request){
+        //dd($request->user_id);
+        $articles = Article::newest()
+            ->where('user_id', $request->user_id)
+            ->get();
+        //->toSql();
+        //$articles = Article::all();
+        //dd($articles);
         return view('articles.index', compact('articles'));
     }
 
@@ -33,7 +50,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('articles.create');
     }
 
     /**

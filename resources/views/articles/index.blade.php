@@ -10,11 +10,13 @@
                             <tr>
                                 <th>Title</th>
                                 <th>Article text</th>
+                                <th>Article id</th>
                             </tr>
                             @foreach($articles as $article)
                             <tr>
                                 <td>{{$article->title}}</td>
                                 <td>{{$article->article_text}}</td>
+                                <td>{{$article->id}}</td>
                             </tr>
                             @endforeach
                         </table>
