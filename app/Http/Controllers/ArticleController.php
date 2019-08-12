@@ -34,11 +34,26 @@ class ArticleController extends Controller
 
     public function search(Request $request){
         //dd($request->user_id);
-        $articles = Article::where('created_at', '>', now()->subDays(1))         
-            ->get();
+        //$articles = Article::where('created_at', '>', now()->subDays(1))->get();
         //->toSql();
         //$articles = Article::all();
         //dd($articles);
+
+        $query = Article::query();
+        // if(request('user_id')){
+        //     $query->where('user_id', request('user_id'));
+        // }
+        // if(request('title')){
+        //     $query->where('title', request('title'));
+        // }
+        // $articles = $query->get();
+
+        $articles = Article::when(request('user_id'), function($query){
+            return $query->where('user_id', request('user_id'));
+        })->when(request('title'), function($query){
+            return $query->where('title', request('title'));
+        })
+        ->get();
         return view('articles.index', compact('articles'));
     }
 

@@ -13,10 +13,10 @@ class Article extends Model
     //     return $query->where('created_at', '>', now()->subDays(1));
     // }
 
-    protected static function boot()
-    {
-        parent::boot();
+    // protected static function boot()
+    // {
+    //     parent::boot();
 
-        static::addGlobalScope(new ArticleUserScope());
-    }
+    //     static::addGlobalScope(new ArticleUserScope());
+    // }
 }
