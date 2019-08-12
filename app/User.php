@@ -40,4 +40,8 @@ class User extends Authenticatable
     public function articles(){
         return $this->hasMany(Article::class);
     }
+
+    // public function getDaysActivateAttribute(){
+    //     return $this->created_at->diffInDays($this->updated_at);
+    // }
 }

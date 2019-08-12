@@ -12,12 +12,14 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Created_at</th>
+                                <th>Days active</th>
                             </tr>
                             @foreach($users as $user)
                             <tr>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->created_at}}</td>
+                                <td>{{$user->days_activate}}</td>
                             </tr>
                             @endforeach
                         </table>

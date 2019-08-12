@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -28,8 +29,35 @@ class UserController extends Controller
         //$users = User::whereId('49')->get();
         //$users = User::whereTime('created_at', '04:39:20')->get();
 
-        $users = User::whereCreatedAt('2019-02-28 03:39:20')->get();
+        //$users = User::whereCreatedAt('2019-02-28 03:39:20')->get();
 
+        //$users = User::all()->sortBy('days_activate');
+
+        // $users = User::select(DB::raw('id, name, email, created_at, DATEDIFF(updated_at, created_at) as days_activate'))
+        //     //->get();
+        //     ->toSql();
+
+        //     dd($users);
+            
+        // $users = User::selectRaw('id, name, email, created_at, DATEDIFF(updated_at, created_at) as days_activate')
+        //     ->get();    
+            //->toSql();
+
+            //dd($users);
+
+        // $users = User::select(DB::raw('id, name, email, created_at, DATEDIFF(updated_at, created_at) as days_activate'))
+        //     ->whereRaw('DATEDIFF(updated_at, created_at) > 300')
+        //     //->get();  
+        //     ->toSql();
+
+        //     dd($users);
+            
+        $users = User::select(DB::raw('id, name, email, created_at, DATEDIFF(updated_at, created_at) as days_activate'))
+            ->orderByRaw('DATEDIFF(updated_at, created_at) desc')
+            ->get();    
+            //->toSql();
+
+            //dd($users);
         
         return view('users.index', compact('users'));
     }
