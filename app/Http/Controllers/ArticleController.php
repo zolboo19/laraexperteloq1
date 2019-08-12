@@ -29,6 +29,21 @@ class ArticleController extends Controller
 
         $articles = Article::all();
         //dd($articles);
+
+        $titles = [];
+        foreach($articles as $article){
+            if(strlen($article->title) > 40){
+                $titles[] = $article->title;
+            }
+        }
+        //dd($titles);
+
+        dd($articles->filter(function($article){
+            return strlen($article->title) > 40;
+        })->map(function($article){
+            return $article->title;
+        }));
+
         return view('articles.index', compact('articles'));
     }
 
