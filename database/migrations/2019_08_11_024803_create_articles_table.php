@@ -19,6 +19,7 @@ class CreateArticlesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('title');
             $table->text('article_text');
+            $table->string('word_count');
             $table->timestamps();
         });
     }

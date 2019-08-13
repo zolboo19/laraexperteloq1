@@ -28,22 +28,30 @@ class ArticleController extends Controller
         //$dateNow = now()->subDays(30);
         //dd($dateNow);
 
-        $articles = Article::all();
+        //$articles = Article::all();
         //dd($articles);
 
-        $titles = [];
-        foreach($articles as $article){
-            if(strlen($article->title) > 40){
-                $titles[] = $article->title;
-            }
-        }
+        // $titles = [];
+        // foreach($articles as $article){
+        //     if(strlen($article->title) > 40){
+        //         $titles[] = $article->title;
+        //     }
+        // }
         //dd($titles);
 
-        dd($articles->filter(function($article){
-            return strlen($article->title) > 40;
-        })->map(function($article){
-            return $article->title;
-        }));
+        // dd($articles->filter(function($article){
+        //     return strlen($article->title) > 40;
+        // })->map(function($article){
+        //     return $article->title;
+        // }));
+        $articles = Article::all();
+        echo 'Нийт зохиол: ' . $articles->count(). '<hr />';
+        echo 'Зохиол дахь нийт үгийн тоо: ' . $articles->sum('word_count'). '<hr />';
+        echo 'Хамгийн бага: ' . $articles->min('word_count'). '<hr />';
+        echo 'Хамгийн их: ' . $articles->max('word_count'). '<hr />';
+        echo 'Дундаж: ' . number_format($articles->avg('word_count'), 2). '<hr />';
+        echo 'Медиан: ' . number_format($articles->median('word_count'), 2). '<hr />';
+        echo 'Олон давтагдсан: ' . implode(', ', $articles->mode('word_count')). '<hr />'; //миний үүсгэсэн утга нь integer or string биш болохоор implode хийж болохгүй байна.
 
         return view('articles.index', compact('articles'));
     }

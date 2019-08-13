@@ -61,10 +61,27 @@ class UserController extends Controller
 
         //$users = User::select(['name', 'id'])->get()->shuffle()->chunk(10);
         //dd($users);
-        $users = User::select(['name', 'id'])->get()->random();
-        dd($users);
+        // $users = User::select(['name', 'id'])->get()->random();
+        // dd($users);
+        $users = User::all()->each(function($user){
+            if($user->password == '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'){
+                info('Хэрэглэгч ' . $user->email . ' нууц үгээ өөрчлөөгүй байна. ');
+            }
+        });
+
+        // $names = User::all()->map(function($user){
+        //     return strlen($user->name);
+        // });
+
+        // print_r($names);
+        // echo $names->avg();
+        $names = User::all()->reject(function($user){
+            return strlen($user->name) > 20;
+        });
+        dd($names);
+
         
-        return view('users.index', compact('users'));
+        //return view('users.index', compact('users'));
     }
 
     /**

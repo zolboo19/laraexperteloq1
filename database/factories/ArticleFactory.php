@@ -10,6 +10,7 @@ $factory->define(Article::class, function (Faker $faker) {
     return [
         'title' => $faker->text(50),
         'article_text' => $faker->text(500),
+        'word_count' =>rand(1, 1000),
         //'user_id' => null,
         //'user_id' => rand(1, 50),
         //'user_id' => User::first()->id,
