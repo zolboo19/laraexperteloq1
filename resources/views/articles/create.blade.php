@@ -8,6 +8,13 @@
                     <div class="card-body">
                         <form action="{{ route('articles.store') }}" method="post">
                             @csrf
+                            Author:
+                            <select name="user_id" class="form-control">
+                                @foreach ($users as $user_id => $name)
+                                    <option value="{{$user_id}}">{{$name}}</option>
+                                @endforeach
+                            </select>
+                            <br>
                             Title:
                             <input type="text" name="title" class="form-control">
                             <br/>

@@ -52,12 +52,17 @@ class UserController extends Controller
 
         //     dd($users);
             
-        $users = User::select(DB::raw('id, name, email, created_at, DATEDIFF(updated_at, created_at) as days_activate'))
-            ->orderByRaw('DATEDIFF(updated_at, created_at) desc')
-            ->get();    
+        // $users = User::select(DB::raw('id, name, email, created_at, DATEDIFF(updated_at, created_at) as days_activate'))
+        //     ->orderByRaw('DATEDIFF(updated_at, created_at) desc')
+        //     ->get();    
             //->toSql();
 
             //dd($users);
+
+        //$users = User::select(['name', 'id'])->get()->shuffle()->chunk(10);
+        //dd($users);
+        $users = User::select(['name', 'id'])->get()->random();
+        dd($users);
         
         return view('users.index', compact('users'));
     }

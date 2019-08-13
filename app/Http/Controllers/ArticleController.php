@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\User;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -79,7 +80,15 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('articles.create');
+        // $users = User::select(['name', 'id'])->get()
+        //     ->prepend(new User((['name' => '-- Зохиогч сонгоно уу? --'])));
+        // $users = User::select(['name', 'id'])->get()
+        //     ->shuffle();
+        //$users = User::pluck('name', 'id');
+        //dd($users);
+        $users = User::select(['name', 'id'])->get()->shuffle()->chunk(10);
+        dd($users);
+        return view('articles.create', compact('users'));
     }
 
     /**

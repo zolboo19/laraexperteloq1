@@ -7,7 +7,19 @@
                     <div class="card-header">Users list</div>
                     <a href="{{route('users.create')}}" class="btn btn-sm btn-primary">Add new user</a>
                     <div class="card-body">
-                        <table class="table">
+                        <div class="row">
+                            @foreach ($users as $page)
+                                <div class="col-md-3">
+                                <b>Team {{$loop->iteration}}</b>
+                                    <ul>
+                                        @foreach ($page as $user)
+                                            <li>{{$user->name}}</li>    
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endforeach
+                        </div>
+                        {{-- <table class="table">
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
@@ -22,7 +34,7 @@
                                 <td>{{$user->days_activate}}</td>
                             </tr>
                             @endforeach
-                        </table>
+                        </table> --}}
                         {{-- {{$users->links()}} --}}
                     </div>
                 </div>
