@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -63,11 +64,11 @@ class UserController extends Controller
         //dd($users);
         // $users = User::select(['name', 'id'])->get()->random();
         // dd($users);
-        $users = User::all()->each(function($user){
-            if($user->password == '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'){
-                info('Хэрэглэгч ' . $user->email . ' нууц үгээ өөрчлөөгүй байна. ');
-            }
-        });
+        // $users = User::all()->each(function($user){
+        //     if($user->password == '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'){
+        //         info('Хэрэглэгч ' . $user->email . ' нууц үгээ өөрчлөөгүй байна. ');
+        //     }
+        // });
 
         // $names = User::all()->map(function($user){
         //     return strlen($user->name);
@@ -75,11 +76,24 @@ class UserController extends Controller
 
         // print_r($names);
         // echo $names->avg();
-        $names = User::all()->reject(function($user){
-            return strlen($user->name) > 20;
-        });
-        dd($names);
+        // $names = User::all()->reject(function($user){
+        //     return strlen($user->name) > 20;
+        // });
+        // dd($names);
 
+        $users = User::select(['name', 'id'])
+            ->take(10)
+            ->get()
+            ->shuffle()
+            ->tap(function($users){
+                Log::info($users->first());
+            })
+            ->chunk(3)
+            //->dd();
+            ->dump();
+            echo 'Results';
+
+            //dd($users);
         
         //return view('users.index', compact('users'));
     }
